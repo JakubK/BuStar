@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BuStarAPI.Extensions;
+using BuStarAPI.Scheduling;
+using BuStarAPI.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +29,14 @@ namespace BuStarAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IScheduledTask, DownloadTristarDataTask>();
+            services.AddScheduler((sender, args)=>
+            {
+                Console.Write(args.Exception.Message);
+                args.SetObserved();
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
