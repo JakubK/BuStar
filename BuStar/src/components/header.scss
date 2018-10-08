@@ -1,0 +1,27 @@
+.project-nav {
+  //display: block;
+  //text-align: center;
+  background-color: #27ae60;
+  color: white;
+  height: 2.2em;
+  width: 100%;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  align-items: center;
+  display: flex;
+}
+.project-name-header {
+  flex: 1;
+  padding: 10px;
+}
+.main-nav {
+  display: inline-block;
+}
+.right {
+  flex: 1;
+  padding-right: 18px;
+}
+.nav-item {
+  margin-right:20px;
+}
