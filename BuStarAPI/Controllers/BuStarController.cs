@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BuStarAPI.Models;
 using BuStarAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,17 @@ namespace BuStarAPI.Controllers
     }
 
     [HttpGet]
+    [Route("buses")]
     public ActionResult<IEnumerable<string>> GetStopNames()
     {
       return Ok(repository.GetStopNames());
+    }    
+
+    [HttpGet]
+    [Route("stopdata/{stop}")]
+    public ActionResult<StopInfoResponse> GetStopData(string stop)
+    {
+      return Ok();
     }
   }
 }
