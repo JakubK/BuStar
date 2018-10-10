@@ -18,7 +18,7 @@ namespace BuStarAPI.Services
 
       foreach(var route in routes)
       {
-        buses[route["routeId"]] = new Bus { Id = route["routeId"].ToString(), Name = route["routeShortName"].ToString()};
+        buses[route["routeId"]] = new Bus { Id = route["routeId"].ToString().Trim(), Name = route["routeShortName"].ToString().Trim()};
       }
 
       foreach(var item in buses)
@@ -40,7 +40,7 @@ namespace BuStarAPI.Services
 
       foreach(var route in routes)
       {
-        stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString(), Name = route["stopDesc"].ToString()};
+        stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString().Trim(), Name = route["stopDesc"].ToString().Trim()};
       }
 
       foreach(var item in stops)
