@@ -1,8 +1,10 @@
+using LiteDB;
+
 namespace BuStarAPI
 {
   public class Stop
   {
-    public string Id;
-    public string Name;
+    public string Id {get;set;}
+    public string Name {get;set;}
   }
 }
