@@ -31,8 +31,12 @@ namespace BuStarAPI.Tasks
 
         //drop collections and send JSON to parsing service
         repository.Clear();
-        dataParseService.ParseBuses(routes);
-        dataParseService.ParseStops(stops);
+        var parsedBuses = dataParseService.ParseBuses(routes);
+        var parsedStops = dataParseService.ParseStops(stops);
+      
+
+        repository.AddBuses(parsedBuses);
+        repository.AddStops(parsedStops);
 
         await Task.FromResult(0);
       }
