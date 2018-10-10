@@ -6,9 +6,9 @@ namespace BuStarAPI.Repository
   public interface IRepository
   {
       void Clear();
-      void AddBus(Bus bus);
+      void AddBuses(IEnumerable<Bus> buses);
       List<Bus> GetBuses();
-      void AddStop(Stop stop);
+      void AddStops(IEnumerable<Stop> stops);
       List<Stop> GetStops();
   }
 }

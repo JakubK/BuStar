@@ -11,14 +11,14 @@ namespace BuStarAPI.Repository
     {
       repository = new LiteRepository(connectionString);
     }
-    public void AddBus(Bus bus)
+    public void AddBuses(IEnumerable<Bus> buses)
     {
-      repository.Insert<Bus>(bus);
+      repository.Insert<Bus>(buses);
     }
 
-    public void AddStop(Stop stop)
+    public void AddStops(IEnumerable<Stop> stops)
     {
-      repository.Insert<Stop>(stop);
+      repository.Insert<Stop>(stops);
     }
 
     public void Clear()
