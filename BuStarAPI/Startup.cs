@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BuStarAPI.Extensions;
+using BuStarAPI.Repository;
 using BuStarAPI.Scheduling;
 using BuStarAPI.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +38,7 @@ namespace BuStarAPI
                 args.SetObserved();
             });
 
+            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
