@@ -35,15 +35,15 @@ namespace BuStarAPI.Services
       string date = DateTime.Now.ToString("yyyy-MM-dd");
       var routes = jObject[date]["stops"];
 
-      Dictionary<JToken, Stop> buses = new Dictionary<JToken, Stop>();
+      Dictionary<JToken, Stop> stops = new Dictionary<JToken, Stop>();
       List<Stop> result = new List<Stop>();
 
       foreach(var route in routes)
       {
-        buses[route["stopId"]] = new Stop { Id = route["stopId"].ToString(), Name = route["stopDesc"].ToString()};
+        stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString(), Name = route["stopDesc"].ToString()};
       }
 
-      foreach(var item in buses)
+      foreach(var item in stops)
       {
         result.Add(new Stop { Id = item.Value.Id, Name = item.Value.Name});
       }
