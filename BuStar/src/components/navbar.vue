@@ -2,11 +2,11 @@
     <div class="project-nav">
     <div class="project-name-header">BuStar</div>
       <div class="main-nav">
-        <span class="nav-item">Home</span>
-        <span class="nav-item">About</span>
+        <router-link to="" class="nav-item">Home</router-link>
+        <router-link to="/about" class="nav-item">About</router-link>
       </div>
       <div class="right"></div>
     </div>
 </template>
 
-<style lang="scss" src="./header.scss" scoped></style>
+<style lang="scss" src="./navbar.scss" scoped></style>

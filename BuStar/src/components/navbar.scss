@@ -3,7 +3,7 @@
   //text-align: center;
   background-color: #27ae60;
   color: white;
-  height: 2.2em;
+  height: 6.2vh;
   width: 100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,4 +24,11 @@
 }
 .nav-item {
   margin-right:20px;
+}
+
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  color:inherit !important;
 }
