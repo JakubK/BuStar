@@ -5,6 +5,23 @@
 }
 .footthingy {
   height: 7.7vh;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   background-color: #2ecc71;
+}
+.icon {
+  height: 6vh;
+  width: 6vh;
+  padding-right: 3px;
+}
+.icons {
+  padding-left: 10px;
+}
+span {
+  color: white;
+}
+@media only screen and (max-width: 1030px) {
+  .authors {display: none}
 }
