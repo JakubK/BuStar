@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BuStarAPI.Models;
 using LiteDB;
 
@@ -32,9 +33,9 @@ namespace BuStarAPI.Repository
       return repository.Query<Bus>().ToList();
     }
 
-    public List<Stop> GetStops()
+    public IEnumerable<string> GetStopNames()
     {
-      return repository.Query<Stop>().ToList();
+      return repository.Query<Stop>().ToList().Select(x => x.Name);
     }
   }
 }

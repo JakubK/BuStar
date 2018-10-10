@@ -9,6 +9,6 @@ namespace BuStarAPI.Repository
       void AddBuses(IEnumerable<Bus> buses);
       List<Bus> GetBuses();
       void AddStops(IEnumerable<Stop> stops);
-      List<Stop> GetStops();
+      IEnumerable<string> GetStopNames();
   }
 }
