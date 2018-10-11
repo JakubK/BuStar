@@ -42,6 +42,12 @@ namespace BuStarAPI
             services.AddSingleton<IDataParseService,DataParseService>();
             services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection"), new DataParseService()));
 
+            services.AddCors(o => o.AddPolicy("EnableCors", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +64,7 @@ namespace BuStarAPI
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseCors("EnableCors");
         }
     }
 }
