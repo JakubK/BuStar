@@ -29,6 +29,25 @@ namespace BuStarAPI.Services
       return result;
     }
 
+    public StopInfo ParseStopInfo(string json)
+    {
+      JObject jObject = JObject.Parse(json);
+      StopInfo result = new StopInfo();
+
+      foreach(var bus in jObject["delay"])
+      {
+        result.BusInfos.Add(new BusInfo
+        {
+          EstimatedTime = bus["estimatedTime"].ToString(),
+          Headsign = bus["headsign"].ToString(),
+          BusID = bus["routeId"].ToString(),
+          TheoreticalTime = bus["theoreticalTime"].ToString()
+        });
+      }
+
+      return result;
+    }
+
     public List<Stop> ParseStops(string json)
     {
       JObject jObject = JObject.Parse(json);
