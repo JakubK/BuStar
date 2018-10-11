@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using BuStarAPI.Models;
 using BuStarAPI.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuStarAPI.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [EnableCors("EnableCors")]
   public class BuStarController : ControllerBase
   {
     private IRepository repository;
