@@ -1,8 +1,8 @@
 <template>
 <div id="main">
 <navbar></navbar>
-<start_page></start_page>
 <search_engine></search_engine>
+<start_page></start_page>
 <foot></foot>
 </div>
 </template>
