@@ -8,7 +8,10 @@ namespace BuStarAPI.Repository
       void Clear();
       void AddBuses(IEnumerable<Bus> buses);
       List<Bus> GetBuses();
+      List<Stop> GetStops();
       void AddStops(IEnumerable<Stop> stops);
+
+      StopInfoResponse GetStopData(string stop);
       IEnumerable<string> GetStopNames();
   }
 }

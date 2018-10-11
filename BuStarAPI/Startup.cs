@@ -39,8 +39,9 @@ namespace BuStarAPI
                 args.SetObserved();
             });
 
-            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSingleton<IDataParseService,DataParseService>();
+            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection"), new DataParseService()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

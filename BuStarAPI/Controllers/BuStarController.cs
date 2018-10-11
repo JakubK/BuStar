@@ -27,7 +27,7 @@ namespace BuStarAPI.Controllers
     [Route("stopdata/{stop}")]
     public ActionResult<StopInfoResponse> GetStopData(string stop)
     {
-      return Ok();
+      return Ok(repository.GetStopData(stop));
     }
   }
 }
