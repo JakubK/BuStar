@@ -5,5 +5,10 @@ namespace BuStarAPI.Models
   public class StopInfoResponse
   {
     public List<StopInfo> StopInfos {get;set;}
+
+    public StopInfoResponse()
+    {
+      StopInfos = new List<StopInfo>();
+    }
   }
 }
