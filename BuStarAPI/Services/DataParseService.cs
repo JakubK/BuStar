@@ -40,7 +40,7 @@ namespace BuStarAPI.Services
         {
           EstimatedTime = bus["estimatedTime"].ToString(),
           Headsign = bus["headsign"].ToString(),
-          BusID = bus["routeId"].ToString(),
+          RouteID = bus["routeId"].ToString(),
           TheoreticalTime = bus["theoreticalTime"].ToString()
         });
       }
