@@ -46,6 +46,7 @@ namespace BuStarAPI.Repository
     public StopInfoResponse GetStopData(string stop)
     {
       var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
+      var buses = GetBuses();
       StopInfoResponse response = new StopInfoResponse();
       using (var client = new WebClient())
       {
@@ -53,6 +54,14 @@ namespace BuStarAPI.Repository
         {
           var stopInfoJson = client.DownloadString(new Uri("http://87.98.237.99:88/delays?stopId=" + s.Id));
           response.StopInfos.Add(dataParseService.ParseStopInfo(stopInfoJson));
+        }
+      }
+
+      foreach(var s in response.StopInfos)
+      {
+        foreach(var r in s.BusInfos)
+        {
+          r.RouteID = buses.Where(x => x.Id == r.RouteID).Select(y => y.Name).FirstOrDefault();
         }
       }
 
