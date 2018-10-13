@@ -1,9 +1,13 @@
+@import '../../Styles/Main.scss';
+
 .fancyline {
   height: 1.5vh;
   display: block;
   background-color: #34495e;
 }
 .footthingy {
+  padding: 10px;
+
   height: 7.7vh;
   display: flex;
   flex-direction: row;
@@ -24,4 +28,30 @@ span {
 }
 @media only screen and (max-width: 1030px) {
   .authors {display: none}
+}
+
+.copyright-section
+{
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.github-icon, .home-icon, .info-icon
+{
+  width: 60px;
+  path
+  {
+    fill: white;
+  }
+}
+
+.copyright-icon
+{
+  width: 60px;
+  margin-right: 10px;
+  path
+  {
+    fill: white;
+  }
 }
