@@ -1,7 +1,7 @@
 <template>
 <div id="main">
 <navbar></navbar>
-<search_engine></search_engine>
+
 <start_page></start_page>
 <foot></foot>
 </div>
@@ -10,7 +10,7 @@
 <script>
   import navbar from './navbar'
   import start_page from './start_page'
-  import search_engine from'./search_engine'
+
   import foot from './foot'
 
   export default {
@@ -18,7 +18,6 @@
     components: {
       'navbar': navbar,
       'start_page': start_page,
-	  'search_engine': search_engine,
       'foot': foot
       }
     }

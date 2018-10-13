@@ -23,6 +23,11 @@ input[type=text]{
 .tipsUl{
 
 }
+p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
 ::placeholder {
     text-transform: none;
     color: gray;
