@@ -29,6 +29,7 @@ import axios from 'axios'
         //clear when api starts working
         busStops:null,
         busStopsTips:[],
+        searchInput: ''
        }
     },
 
