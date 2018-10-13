@@ -10,7 +10,6 @@
 <script>
   import navbar from './navbar'
   import start_page from './start_page'
-
   import foot from './foot'
 
   export default {
