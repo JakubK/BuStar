@@ -11,7 +11,7 @@ import about_page from './about_page'
   export default {
     name: 'bustar',
     components: {
-      about_page,
+      about_page
       }
     }
 </script>
