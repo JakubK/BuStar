@@ -6,9 +6,9 @@
         spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
       <input hidden type="submit">
       <ul v-if="showTips" class="tipsUl">
-        <li v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
+        <li clas="tipsLi" v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
       </ul>
-      <table class="tableTable" v-if="showTable">
+      <table v-if="showTable">
         <tr>
           <th>Bus Line</th>
           <th>Head Sign</th>
@@ -23,15 +23,6 @@
           <td>{{busInfo.estimatedTime}}</td>
          </tr>
         </template>
-
-      <!-- 
-        <tr v-for="(info, index) in stopDatas.stopInfos.busInfos" :key="info">
-          <td>{{index}}</td>
-        
-         <td>{{this.info.stopInfos[0].busInfos[index].routeID}}</td>
-          <td>{{this.info.stopInfos[0].busInfos[index].headsign}}</td>
-          <td>{{this.info.stopInfos[0].busInfos[index].theoreticalTime}}</td>
-          <td>{{this.info.stopInfos[0].busInfos[index].estimatedTime}}</td>-->
       </table>
     </form>
     <!--Not supported in most browsers
@@ -84,14 +75,15 @@
       createTable(){
         this.searchSubmit().then(() =>
         {
-          console.log(this.stopDatas)
           this.showTable=true;
-          console.log(this.stopDatas.stopInfos[0].busInfos)
+          this.showTips=false;
+          this.searchInput=this.busStopsTips[0];
         })
       },
       inputChange() {
         if (this.searchInput != '') {
           this.showTips = true;
+          this.showTable=false;
         } else {
           this.showTips = false;
         }
