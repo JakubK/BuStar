@@ -1,7 +1,7 @@
 <template>
   <div class="main_body">
      <p>BuStar</p>
-    <form @submit.prevent="searchSubmit()">
+    <form @submit.prevent="createTable()">
       <input v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off" autocapitalize="off"
         spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
       <input hidden type="submit">
@@ -40,18 +40,16 @@
         showTable: false,
         //clear when api starts working
         busStops: null,
-        busStopData: null,
+        stopDatas: [],
         busStopsTips: [],
         searchInput: ''
       }
     },
-
     mounted() {
-
       axios.get("https://localhost:5001/api/bustar/buses")
         .then((response) => {
           this.busStops = response.data,
-            console.log(this.busStops)
+          console.log(this.busStops)
         })
         .catch(error => {
           console.log(error.response)
@@ -60,21 +58,17 @@
 
     methods: {
       searchSubmit() {
-        axios.get("https://localhost:5001/api/bustar/stopdata/" + this.busStopsTips[0].replace('/', '*'))
+        return axios.get("https://localhost:5001/api/bustar/stopdata/" + this.busStopsTips[0].replace('/', '*'))
           .then((response) => {
-            this.busStopData = response.data
-            //console.log(this.busStopData)
-          })
-          .then(() =>
-          {     
-            createTable();
-          })
-          .catch(error => {
-            console.log(error.response)
+            this.stopDatas = response.data;
+            return response.data;
           })
       },
       createTable(){
-        console.log(this.busStopData);
+        this.searchSubmit().then(() =>
+        {
+          console.log(this.stopDatas);
+        })
       },
       inputChange() {
         if (this.searchInput != '') {
