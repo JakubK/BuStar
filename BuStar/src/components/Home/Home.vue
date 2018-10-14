@@ -16,7 +16,7 @@
           <th>Estimated Arrival Time</th>
         </tr>
         <template v-for="(stopInfo) in stopDatas.stopInfos">
-         <tr v-for="(busInfo) in stopInfo.busInfos" :key="busInfo" >
+         <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
           <td>{{busInfo.routeID}}</td>
           <td>{{busInfo.headsign}}</td>
           <td>{{busInfo.theoreticalTime}}</td>
@@ -25,19 +25,13 @@
         </template>
       </table>
     </form>
-    <!--Not supported in most browsers
-  <datalist  id="stopsList">
-        <option value="test"></option>
-            <option value="tata"></option>
-    </datalist>                             -->
-
   </div>
 </template>
 
 <script>
   import axios from 'axios'
   export default {
-    name: 'bustar',
+    name: 'Home',
     components: {
       axios
     },
