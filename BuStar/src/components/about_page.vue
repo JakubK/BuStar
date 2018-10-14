@@ -1,6 +1,6 @@
  <template>
  <div class="main_body">
- <p>BuStar to projekt</p>
+ <span>BuStar to projekt</span>
  </div>
  </template>
 
