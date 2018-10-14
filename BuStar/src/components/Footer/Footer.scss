@@ -1,28 +1,26 @@
 @import '../../Styles/Main.scss';
 
+$iconHeight: 30px;
+
 .fancyline {
   height: 1.5vh;
   display: block;
   background-color: #34495e;
 }
-.footthingy {
-  padding: 10px;
-
-  height: 7.7vh;
+.footer {
+  height: 5.7vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: #2ecc71;
 }
-.icon {
-  height: 6vh;
-  width: 6vh;
-  padding-right: 3px;
+
+.icons
+{
+  padding-left: 15px;
 }
-.icons {
-  padding-left: 10px;
-}
+
 span {
   color: white;
 }
@@ -30,28 +28,41 @@ span {
   .authors {display: none}
 }
 
-.copyright-section
+.authors
 {
-  padding-right: 30px;
-  display: flex;
-  align-items: center;
+  color: white;
 }
 
-.github-icon, .home-icon, .info-icon
+.author > a
 {
-  width: 60px;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.copyright-section
+{
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.github-icon, .home-icon, .info-icon, .copyright-icon
+{
+  height: $iconHeight;
   path
   {
     fill: white;
+
+  }
+
+  &:hover
+  {
+    cursor: pointer;
   }
 }
 
 .copyright-icon
 {
-  width: 60px;
   margin-right: 10px;
-  path
-  {
-    fill: white;
-  }
 }
