@@ -1,13 +1,28 @@
 <template>
   <div class="main_body">
-    <p>BuStar</p>
-    <form>
+     <p>BuStar</p>
+    <form @submit.prevent="searchSubmit()">
       <input v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off" autocapitalize="off"
         spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
+      <input hidden type="submit">
       <ul v-if="showTips" class="tipsUl">
         <li v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
       </ul>
+      <table class="tableTable" v-if="showTable">
+        <tr>
+          <th>Bus Line</th>
+          <th>Head Sign</th>
+          <th>Arrival Time from Time Table</th>
+          <th>Estimated Arrival Time</th>
+        </tr>
+      </table>
     </form>
+    <!--Not supported in most browsers
+  <datalist  id="stopsList">
+        <option value="test"></option>
+            <option value="tata"></option>
+    </datalist>                             -->
+
   </div>
 </template>
 
@@ -22,7 +37,10 @@
 
       return {
         showTips: false,
+        showTable: false,
+        //clear when api starts working
         busStops: null,
+        busStopData: null,
         busStopsTips: [],
         searchInput: ''
       }
@@ -39,8 +57,25 @@
           console.log(error.response)
         })
     },
-    methods: {
 
+    methods: {
+      searchSubmit() {
+        axios.get("https://localhost:5001/api/bustar/stopdata/" + this.busStopsTips[0].replace('/', '*'))
+          .then((response) => {
+            this.busStopData = response.data
+            //console.log(this.busStopData)
+          })
+          .then(() =>
+          {     
+            createTable();
+          })
+          .catch(error => {
+            console.log(error.response)
+          })
+      },
+      createTable(){
+        console.log(this.busStopData);
+      },
       inputChange() {
         if (this.searchInput != '') {
           this.showTips = true;
@@ -55,6 +90,7 @@
         }
       }
     }
+    
   }
 
 </script>
