@@ -1,0 +1,38 @@
+.main_body {
+  height: 86.6vh;
+  background-color: #ecf0f1;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+  input[type=text]{
+      text-align: center;
+      position: static;
+      left:10vw;
+      box-sizing: border-box;
+      height: 7vh;
+      width: 35vw;
+      border-radius: 15px;
+      box-shadow: 1px 3px 4px 0px #ccc;
+      border: none;
+      outline: none;
+      font-size:3vh;
+      color: gray;
+      display:block;
+  }
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  ::placeholder {
+      text-transform: none;
+      color: gray;
+      opacity: 0.7;
+  }
+  

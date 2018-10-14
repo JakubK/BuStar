@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <Navbar/>
-      <transition name="fade">
         <router-view/>
-      </transition>
     <Footer/>
   </div>
 </template>
@@ -26,12 +24,5 @@ body {
   margin: 0px;
 }
 
-.fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-}
-.fade-enter, .fade-leave-to  
-{
-    opacity: 0
-}
 
 </style>
