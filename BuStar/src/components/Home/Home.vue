@@ -15,6 +15,24 @@
           <th>Arrival Time from Time Table</th>
           <th>Estimated Arrival Time</th>
         </tr>
+        <template v-for="(stopInfo, index) in stopDatas.stopInfos">
+         <tr v-for="(busInfo, index) in stopInfo.busInfos" >
+          <td>{{busInfo.routeID}}</td>
+          <td>{{busInfo.headsign}}</td>
+          <td>{{busInfo.theoreticalTime}}</td>
+          <td>{{busInfo.estimatedTime}}</td>
+         </tr>
+        </template>
+
+      <!-- 
+        <tr v-for="(info, index) in stopDatas.stopInfos.busInfos" :key="info">
+          <td>{{index}}</td>
+        
+         <td>{{this.info.stopInfos[0].busInfos[index].routeID}}</td>
+          <td>{{this.info.stopInfos[0].busInfos[index].headsign}}</td>
+          <td>{{this.info.stopInfos[0].busInfos[index].theoreticalTime}}</td>
+          <td>{{this.info.stopInfos[0].busInfos[index].estimatedTime}}</td>-->
+          </tr>
       </table>
     </form>
     <!--Not supported in most browsers
@@ -67,7 +85,9 @@
       createTable(){
         this.searchSubmit().then(() =>
         {
-          console.log(this.stopDatas);
+          console.log(this.stopDatas)
+          this.showTable=true;
+          console.log(this.stopDatas.stopInfos[0].busInfos)
         })
       },
       inputChange() {
