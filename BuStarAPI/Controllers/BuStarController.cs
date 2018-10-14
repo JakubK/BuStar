@@ -29,6 +29,7 @@ namespace BuStarAPI.Controllers
     [Route("stopdata/{stop}")]
     public ActionResult<StopInfoResponse> GetStopData(string stop)
     {
+      stop = stop.Replace('*','/');
       return Ok(repository.GetStopData(stop));
     }
   }
