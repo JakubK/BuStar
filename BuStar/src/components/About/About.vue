@@ -8,12 +8,28 @@
           <h2>Authors</h2>
           <div class="author-boxes">
             <div class="author">
+            <img src="../../assets/revange_av.png" fluid alt="RevangE" height="150px" width="150px"/><br>
+            <h4>RevangE</h4>
+            <span>Main functionality of the main page</span>
+            <div></div>
             </div>
             <div class="author">
+            <img src="../../assets/jakub_av.png" fluid alt="Jakub" height="150px" width="150px"/><br>
+            <h4>Jakub K</h4>
+            <span>Backend, project lead</span>
+            <div></div>
             </div>
             <div class="author">
+            <img src="../../assets/klon_av.png" fluid alt="Klon" height="150px" width="150px"/><br>
+            <h4>Klon</h4>
+            <span>Logo</span>
+            <div></div>
             </div>
             <div class="author">
+            <img src="../../assets/frisk_av.png" fluid alt="Frisk" height="150px" width="150px"/><br>
+            <h4>Frisk</h4>
+            <span>SCSS styling, this very page</span>
+            <div></div>
             </div>
           </div>
         </div>
