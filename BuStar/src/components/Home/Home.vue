@@ -26,6 +26,9 @@
          </tr>
         </template>
       </table>
+      <div class="preloader" v-if="searching == 1">
+        Searching for a buses...
+      </div>
     </form>
   </div>
 </template>
@@ -48,7 +51,8 @@
         busStops: null,
         stopDatas: [],
         busStopsTips: [],
-        searchInput: ''
+        searchInput: '',
+        searching: -1
       }
     },
     mounted() {
@@ -64,6 +68,7 @@
 
     methods: {
       searchSubmit() {
+        this.searching = 1;
         return axios.get("https://localhost:5001/api/bustar/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
@@ -76,6 +81,7 @@
         {
           this.showTable=true;
           this.showTips=false;
+          this.searching = 0;
         })
       },
       inputChange() {
