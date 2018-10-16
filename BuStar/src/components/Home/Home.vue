@@ -5,13 +5,13 @@
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off" autocapitalize="off"
       spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
       <input hidden type="submit">
-     <!-- <ul v-if="showTips" class="tipsUl">
-        <li v-on:mouseover="searchInput=stops" v-on:click="createTable" class="tipsLi" v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
-      </ul>-->
+
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips" :key="stops">{{ stops }}</span>
-      <table v-if="showTable">
-        <template v-for="(stopInfo) in stopDatas.stopInfos">
-          <tr>
+      
+    </form>
+    <table v-if="showTable">
+        <template v-for="(stopInfo, index) in stopDatas.stopInfos">
+          <tr :key="index">
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
@@ -25,7 +25,6 @@
          </tr>
         </template>
       </table>
-    </form>
   </div>
 </template>
 
