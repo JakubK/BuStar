@@ -8,7 +8,7 @@
 
 }
 
-  input[type=text]{
+.inputStyle{
       text-align: center;
       position: static;
       left:10vw;
@@ -16,14 +16,41 @@
       height: 7vh;
       width: 35vw;
       border-radius: 15px;
-      box-shadow: 1px 3px 4px 0px #ccc;
+      box-shadow: 1px 4px 10px 0px #ccc;
       border: none;
       outline: none;
       font-size:3vh;
       color: gray;
       display:block;
   }
-
+.inputStyleActive{
+  text-align: center;
+  position: static;
+  left:10vw;
+  box-sizing: border-box;
+  height: 7vh;
+  width: 35vw;
+  border-radius: 15px 15px 0 0;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-size:3vh;
+  color: gray;
+  display:block;
+}
+.tipsList{
+  list-style-type:none;
+  background-color:white;
+  padding:5px;
+  display:block;
+}
+.tipsList:hover{
+background-color: rgba(#ccc,0.5);
+}
+.tipsList:last-child{
+  border-radius: 0 0 15px 15px;
+  box-shadow: 1px 4px 10px 0px #ccc;
+}
   p {
     text-align: center;
     font-weight: bold;
