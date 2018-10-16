@@ -76,11 +76,12 @@
           })
       },
       createTable(stop){
+        this.inputClass = 'inputStyle';
+        this.showTips=false;
         this.searchInput=stop;
         this.searchSubmit().then(() =>
         {
-          this.showTable=true;
-          this.showTips=false;
+          this.showTable=true; 
           this.searching = 0;
         })
       },
