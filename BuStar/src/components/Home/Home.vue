@@ -1,20 +1,23 @@
 <template>
   <div class="main_body">
      <p>BuStar</p>
-    <form @submit.prevent="createTable(busStopsTips[0])">
+        <form @submit.prevent="createTable(busStopsTips[0])">
+
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off" autocapitalize="off"
       spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
       <input hidden type="submit">
-      <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips" :key="stops">{{ stops }}</span>    
-    </form>
-    <table>
-        <template v-if="showTable" v-for="(stopInfo, index) in stopDatas.stopInfos">
-          <tr :key="index">
+     <!-- <ul v-if="showTips" class="tipsUl">
+        <li v-on:mouseover="searchInput=stops" v-on:click="createTable" class="tipsLi" v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
+      </ul>-->
+            <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips" :key="stops">{{ stops }}</span>   
+      <table v-if="showTable">
+        <tr>
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
           <th>Estimated Arrival Time</th>
-          </tr>
+        </tr>
+        <template v-for="(stopInfo) in stopDatas.stopInfos">
          <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
           <td>{{busInfo.routeID}}</td>
           <td>{{busInfo.headsign}}</td>
@@ -22,10 +25,8 @@
           <td>{{busInfo.estimatedTime}}</td>
          </tr>
         </template>
-        <div class="preloader" v-if="searching == 1">
-          Searching for buses...
-        </div>
-    </table>
+      </table>
+    </form>
   </div>
 </template>
 
@@ -47,14 +48,14 @@
         busStops: null,
         stopDatas: [],
         busStopsTips: [],
-        searchInput: '',
-        searching: -1
+        searchInput: ''
       }
     },
     mounted() {
       axios.get("https://localhost:5001/api/bustar/buses")
         .then((response) => {
-          this.busStops = response.data
+          this.busStops = response.data,
+          console.log(this.busStops)
         })
         .catch(error => {
           console.log(error.response)
@@ -63,20 +64,18 @@
 
     methods: {
       searchSubmit() {
-        this.searching = 1;
         return axios.get("https://localhost:5001/api/bustar/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
             return response.data;
           })
       },
-      createTable(bus){
-        this.searchInput=bus;
+      createTable(stop){
+        this.searchInput=stop;
         this.searchSubmit().then(() =>
         {
           this.showTable=true;
           this.showTips=false;
-          this.searching = 0;
         })
       },
       inputChange() {
