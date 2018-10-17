@@ -1,5 +1,5 @@
 ## Installation and hosting 
-### Linux Arch based systems 
+### Linux Arch based distros 
 ```bash
 # Install dependencies
 sudo pacman -S dotnet-sdk
@@ -20,3 +20,30 @@ dotnet dev-certs https
 dotnet run
 ```
 
+### Debian based distros
+```bash
+# Install dotnet-sdk
+ wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
+sudo mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
+wget -q https://packages.microsoft.com/config/debian/9/prod.list
+sudo mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
+sudo chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+sudo chown root:root /etc/apt/sources.list.d/microsoft-prod.list
+sudo apt-get update
+sudo apt-get install dotnet-sdk-2.1
+
+# Install a tool to generate the certificate
+dotnet tool install --global dotnet-dev-certs
+
+# Fetch project packages
+dotnet restore
+
+# Export path (works only in current session)
+export DOTNET_ROOT="/opt/dotnet/"
+
+# Generate certificates
+dotnet dev-certs https
+
+# Start the API server
+dotnet run
+```
