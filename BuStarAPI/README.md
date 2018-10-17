@@ -1,4 +1,7 @@
 ## Installation and hosting 
+
+Server advertises its services on port 5001 so it's essential to open the port on your firewall.
+
 ### Linux Arch based distros 
 ```bash
 # Install dependencies
