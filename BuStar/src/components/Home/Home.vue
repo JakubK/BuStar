@@ -53,7 +53,8 @@
         stopDatas: [],
         busStopsTips: [],
         searchInput: '',
-        searching: -1
+        searching: -1,
+        reCall:''
       }
     },
     mounted() {
@@ -69,7 +70,10 @@
 
     methods: {
       searchSubmit() {
+        if(this.showTable==false)
+        {
         this.searching = 1;
+        }
         return axios.get("https://localhost:5001/api/bustar/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
@@ -83,17 +87,14 @@
         this.searchSubmit().then(() => {
           this.showTable = true;
           this.searching = 0;
+          this.reCall = setInterval(() => {this.searchSubmit(); }, 30000)
         })
       },
       inputChange() {
-        this.busStopsTips = [];
-        for (this.i = 0, this.tipsPostion = 0; this.i < Object.keys(this.busStops).length; this.i++) {
-          if (this.busStops[this.i].toLowerCase().includes(this.searchInput.toLowerCase()) && this.tipsPostion < 5) {
-            this.busStopsTips[this.tipsPostion++] = this.busStops[this.i];
-          }
-          if (this.searchInput != '') {
+        this.showTable = false;
+        clearInterval(this.reCall)
+         if (this.searchInput != '') {
             this.showTips = true;
-            this.showTable = false;
             if (this.tipsPostion > 0) {
               this.inputClass = 'inputStyleActive';
             } else {
@@ -102,6 +103,11 @@
           } else {
             this.showTips = false;
             this.inputClass = 'inputStyle';
+          }
+        this.busStopsTips = [];
+        for (this.i = 0, this.tipsPostion = 0; this.i < Object.keys(this.busStops).length; this.i++) {
+          if (this.busStops[this.i].toLowerCase().includes(this.searchInput.toLowerCase()) && this.tipsPostion < 5) {
+            this.busStopsTips[this.tipsPostion++] = this.busStops[this.i];
           }
         }
       }
