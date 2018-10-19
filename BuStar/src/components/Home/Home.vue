@@ -4,7 +4,7 @@
     <form @submit.prevent="createTable(busStopsTips[0])">
 
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off"
-        autocapitalize="off" spellcheck="false" type="text" autofocus placeholder="Start typing your stop's name">
+        autocapitalize="off" spellcheck="false" type="text" autofocus placeholder="Start typing your stop name">
       <input hidden type="submit">
       <!-- <ul v-if="showTips" class="tipsUl">
         <li v-on:mouseover="searchInput=stops" v-on:click="createTable" class="tipsLi" v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
