@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace BuStarAPI.Services
 {
@@ -6,7 +7,7 @@ namespace BuStarAPI.Services
   {
     public string Current()
     {
-      return (DateTime.Now.Hour + ":" + DateTime.Now.Minute);
+      return DateTime.Now.ToString("HH:mm",CultureInfo.InvariantCulture);
     }
   }
 }
