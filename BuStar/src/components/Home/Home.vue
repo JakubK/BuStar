@@ -27,11 +27,13 @@
       </table>
       <div class="preloader" v-if="searching">
         Searching for buses...
+        <three-dots/>
       </div>
       <div class="preloader" v-else-if="loading">
         Fetching stops...
+        <three-dots/>
       </div>
-      <div class="fetch-error" v-if="fetchError">
+      <div class="preloader" v-if="fetchError">
         Sorry, stops could not be fetched from the Server. Please refresh this page or try later.
       </div>
     </form>
@@ -41,10 +43,12 @@
 <script>
   import axios from 'axios'
   import connections from '../../api/connections.js'
+  import {ThreeDots} from 'vue-loading-spinner'
   export default {
     name: 'Home',
     components: {
-      axios
+      axios,
+      ThreeDots
     },
     data() {
       return {
@@ -82,15 +86,13 @@
     methods: {
       searchSubmit() {
         if(this.showTable==false)
-        {
-          this.searching = true;
-        }
-          return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
-            .then((response) => {
-              this.stopDatas = response.data;
-              return response.data;
-            })
-          
+           this.searching = true;
+        
+        return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
+          .then((response) => {
+            this.stopDatas = response.data;
+            return response.data;
+          })        
       },
       createTable(stop) {
         this.inputClass = 'inputStyle';
