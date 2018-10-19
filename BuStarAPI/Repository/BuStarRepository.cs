@@ -13,10 +13,13 @@ namespace BuStarAPI.Repository
   {
     private LiteRepository repository;
     private IDataParseService dataParseService;
-    public BuStarRepository(string connectionString, IDataParseService dataParseServiceParam)
+    private IDateTimeService dateTimeService;
+    public BuStarRepository(string connectionString, IDataParseService dataParseServiceParam, IDateTimeService dateTimeServiceParam)
     {
       repository = new LiteRepository(connectionString);
+
       this.dataParseService = dataParseServiceParam;
+      this.dateTimeService = dateTimeServiceParam;
     }
     public void AddBuses(IEnumerable<Bus> buses)
     {
@@ -48,6 +51,9 @@ namespace BuStarAPI.Repository
       var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
       var buses = GetBuses();
       StopInfoResponse response = new StopInfoResponse();
+      response.ResponseTime = dateTimeService.Current();
+      System.Diagnostics.Debug.WriteLine(dateTimeService.Current());
+      System.Diagnostics.Debug.WriteLine(DateTime.Now);
       using (var client = new WebClient())
       {
         foreach(var s in stops) //each stopInfo

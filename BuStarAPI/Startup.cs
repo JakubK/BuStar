@@ -31,7 +31,6 @@ namespace BuStarAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddSingleton<IScheduledTask, DownloadTristarDataTask>();
             services.AddScheduler((sender, args)=>
             {
@@ -40,7 +39,9 @@ namespace BuStarAPI
             });
 
             services.AddSingleton<IDataParseService,DataParseService>();
-            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection"), new DataParseService()));
+            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection")
+            , new DataParseService()
+            , new DateTimeService()));
 
             services.AddCors(o => o.AddPolicy("EnableCors", builder =>
             {
