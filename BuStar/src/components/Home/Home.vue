@@ -36,13 +36,13 @@
 
 <script>
   import axios from 'axios'
+  import connections from '../../api/connections.js'
   export default {
     name: 'Home',
     components: {
       axios
     },
     data() {
-
       return {
         tipsListClass: 'tipsList',
         inputClass: 'inputStyle',
@@ -58,7 +58,7 @@
       }
     },
     mounted() {
-      axios.get("https://localhost:5001/api/bustar/buses")
+      axios.get( connections.api + "/buses")
         .then((response) => {
           this.busStops = response.data,
             console.log(this.busStops)
@@ -73,12 +73,12 @@
         if(this.showTable==false)
         {
         this.searching = 1;
-        }
-        return axios.get("https://localhost:5001/api/bustar/stopdata/" + this.searchInput.replace('/', '*'))
+        return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
             return response.data;
           })
+        }
       },
       createTable(stop) {
         this.inputClass = 'inputStyle';
