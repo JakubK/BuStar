@@ -117,7 +117,7 @@
           this.reCall = setInterval(() => {this.searchSubmit(); }, 60000)
         })
       },
-      inputChange() { 
+      inputChange() {
          this.busStopsTips = [];
         for (this.i = 0, this.tipsPostion = 0; this.i < Object.keys(this.busStops).length; this.i++) {
           if (this.busStops[this.i].toLowerCase().includes(this.searchInput.toLowerCase()) && this.tipsPostion < 5) {
@@ -134,6 +134,7 @@
               this.inputClass = 'inputStyle';
             }
           } else {
+            this.busStopsTips=[];
             this.showTips = false;
             this.inputClass = 'inputStyle';
           }
