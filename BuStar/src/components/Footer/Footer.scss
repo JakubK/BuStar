@@ -22,20 +22,29 @@ $iconHeight: 30px;
 }
 
 span {
-  color: white;
+  color: $white;
 }
 @media only screen and (max-width: 1030px) {
-  .authors {display: none}
+  .open-gdansk {display: none}
 }
 
-.authors
+.open-gdansk
 {
-  color: white;
+  color: $white;
+  a
+  {
+    text-decoration: underline;
+    color: $white;
+    &:hover
+    {
+      color: #16a085;
+    }
+  }
 }
 
 .author > a
 {
-  color: white;
+  color: $white;
   text-decoration: none;
 }
 
@@ -51,13 +60,17 @@ span {
   height: $iconHeight;
   path
   {
-    fill: white;
-
+    fill: $white;
+    transition: fill 0.5s;
   }
 
   &:hover
   {
     cursor: pointer;
+    path
+    {
+      fill: white;
+    }
   }
 }
 

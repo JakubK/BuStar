@@ -10,9 +10,8 @@
         :key="stops">{{ stops }}</span>
       <p>{{ requestTime }}</p>
       <table v-if="showTable">
-
-        <template v-for="(stopInfo) in stopDatas.stopInfos"> 
-         <tr>
+        <template v-for="(stopInfo, index) in stopDatas.stopInfos"> 
+         <tr :key="index">
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
