@@ -10,9 +10,8 @@
         :key="stops">{{ stops }}</span>
       <p v-if="showTable">{{ requestTime }}</p>
       <table v-if="showTable">
-
-        <template v-for="(stopInfo) in stopDatas.stopInfos"> 
-         <tr>
+        <template v-for="(stopInfo, index) in stopDatas.stopInfos"> 
+         <tr :key="index">
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
@@ -47,6 +46,8 @@
 <script>
   import axios from 'axios'
   import connections from '../../api/connections.js'
+  import globals from '../../globals/globals.js'
+
   import {ThreeDots} from 'vue-loading-spinner'
   export default {
     name: 'Home',
@@ -62,7 +63,6 @@
         showTips: false,
         showTable: false,
         //clear when api starts working
-        busStops: null,
         stopDatas: [],
         busStopsTips: [],
         searchInput: '',
@@ -77,16 +77,19 @@
     },
     mounted() {
       this.loading = true;
-      axios.get( connections.api + "/buses")
-        .then((response) => {
-          this.busStops = response.data,
-          this.loading = false;
-        })
-        .catch(error => {
-          console.log(error.response)
-          this.fetchError = true;
-          this.loading = false;
-        })
+      if(globals.stops.length == 0)
+      {
+        axios.get( connections.api + "/buses")
+          .then((response) => {
+            globals.stops = response.data,
+            this.loading = false
+          })
+          .catch(error => {
+            console.log(error.response)
+            this.fetchError = true;
+            this.loading = false;
+          })
+      }
     },
 
     methods: {
@@ -119,9 +122,9 @@
       },
       inputChange() {
          this.busStopsTips = [];
-        for (this.i = 0, this.tipsPostion = 0; this.i < Object.keys(this.busStops).length; this.i++) {
-          if (this.busStops[this.i].toLowerCase().includes(this.searchInput.toLowerCase()) && this.tipsPostion < 5) {
-            this.busStopsTips[this.tipsPostion++] = this.busStops[this.i];
+        for (this.i = 0, this.tipsPostion = 0; this.i < Object.keys(globals.stops).length; this.i++) {
+          if (globals.stops[this.i].toLowerCase().includes(this.searchInput.toLowerCase()) && this.tipsPostion < 5) {
+            this.busStopsTips[this.tipsPostion++] = globals.stops[this.i];
           }
         }
         this.showTable = false;
