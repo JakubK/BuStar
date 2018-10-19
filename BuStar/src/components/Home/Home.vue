@@ -8,6 +8,7 @@
       <input hidden type="submit">
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
+      <p>{{ requestTime }}</p>
       <table v-if="showTable">
         <tr>
           <th>Bus Line</th>
@@ -24,11 +25,14 @@
           </tr>
         </template>
       </table>
-      <div class="preloader" v-if="searching == 1">
+      <div class="preloader" v-if="searching">
         Searching for buses...
       </div>
-      <div class="preloader" v-else-if="loading == 1">
+      <div class="preloader" v-else-if="loading">
         Fetching stops...
+      </div>
+      <div class="fetch-error" v-if="fetchError">
+        Sorry, stops could not be fetched from the Server. Please refresh this page or try later.
       </div>
     </form>
   </div>
@@ -54,22 +58,24 @@
         busStopsTips: [],
         searchInput: '',
 
-        searching: -1,
-        loading: -1,
+        searching: false,
+        loading: false,
+        fetchError: false,
 
         reCall:''
       }
     },
     mounted() {
-      this.loading = 1;
+      this.loading = true;
       axios.get( connections.api + "/buses")
         .then((response) => {
           this.busStops = response.data,
-          this.loading = 0;
-            console.log(this.busStops)
+          this.loading = false;
         })
         .catch(error => {
           console.log(error.response)
+          this.fetchError = true;
+          this.loading = false;
         })
     },
 
@@ -77,13 +83,14 @@
       searchSubmit() {
         if(this.showTable==false)
         {
-          this.searching = 1;
+          this.searching = true;
+        }
           return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
             .then((response) => {
               this.stopDatas = response.data;
               return response.data;
             })
-          }
+          
       },
       createTable(stop) {
         this.inputClass = 'inputStyle';
@@ -91,8 +98,8 @@
         this.searchInput = stop;
         this.searchSubmit().then(() => {
           this.showTable = true;
-          this.searching = 0;
-          this.reCall = setInterval(() => {this.searchSubmit(); }, 30000)
+          this.searching = false;
+          this.reCall = setInterval(() => {this.searchSubmit(); }, 60000)
         })
       },
       inputChange() {
@@ -115,6 +122,13 @@
             this.busStopsTips[this.tipsPostion++] = this.busStops[this.i];
           }
         }
+      }
+    },
+    computed:
+    {
+      requestTime()
+      {
+        return this.stopDatas.responseTime;
       }
     }
 
