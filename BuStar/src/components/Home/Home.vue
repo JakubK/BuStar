@@ -11,7 +11,8 @@
       <p v-if="showTable">{{ requestTime }}</p>
       <table v-if="showTable">
         <template v-for="(stopInfo, index) in stopDatas.stopInfos"> 
-         <tr :key="index">
+
+         <tr :key="index" v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0">
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
@@ -96,7 +97,6 @@
       searchSubmit() {
         if(this.showTable==false)
            this.searching = true;
-           
         return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
@@ -108,6 +108,7 @@
         {
             this.empty=true;
             return 0;
+            
         }
         else
         this.empty=false;
