@@ -10,8 +10,9 @@
         :key="stops">{{ stops }}</span>
       <p>{{ requestTime }}</p>
       <table v-if="showTable">
-        <template v-for="(stopInfo, index) in stopDatas.stopInfos"> 
-         <tr :key="index">
+
+        <template v-for="(stopInfo) in stopDatas.stopInfos"> 
+         <tr>
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
@@ -32,6 +33,9 @@
       <div class="preloader" v-else-if="loading">
         Fetching stops...
         <three-dots/>
+      </div>
+      <div class="preloader" v-else-if="empty">
+        There is no stop with this name.
       </div>
       <div class="preloader" v-if="fetchError">
         Sorry, stops could not be fetched from the Server. Please refresh this page or try later.
@@ -65,6 +69,7 @@
         searching: false,
         loading: false,
         fetchError: false,
+        empty: false,
 
         reCall:''
       }
@@ -95,6 +100,13 @@
           })        
       },
       createTable(stop) {
+        if(Object.keys(this.busStopsTips).length==0)
+        {
+            this.empty=true;
+            return 0;
+        }
+        else
+        this.empty=false;
         this.inputClass = 'inputStyle';
         this.showTips = false;
         this.searchInput = stop;
