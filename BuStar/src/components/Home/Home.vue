@@ -46,6 +46,7 @@
   import {ThreeDots} from 'vue-loading-spinner'
   export default {
     name: 'Home',
+    props: ['stop'],
     components: {
       axios,
       ThreeDots
@@ -87,7 +88,7 @@
       searchSubmit() {
         if(this.showTable==false)
            this.searching = true;
-        
+           
         return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
