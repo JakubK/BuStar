@@ -6,9 +6,6 @@
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off"
         autocapitalize="off" spellcheck="false" type="text" autofocus placeholder="Start typing your stop name">
       <input hidden type="submit">
-      <!-- <ul v-if="showTips" class="tipsUl">
-        <li v-on:mouseover="searchInput=stops" v-on:click="createTable" class="tipsLi" v-for="stops in busStopsTips" :key="stops">{{ stops }}</li>
-      </ul>-->
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
       <table v-if="showTable">
@@ -28,7 +25,10 @@
         </template>
       </table>
       <div class="preloader" v-if="searching == 1">
-        Searching for a buses...
+        Searching for buses...
+      </div>
+      <div class="preloader" v-else-if="loading == 1">
+        Fetching stops...
       </div>
     </form>
   </div>
@@ -53,14 +53,19 @@
         stopDatas: [],
         busStopsTips: [],
         searchInput: '',
+
         searching: -1,
+        loading: -1,
+
         reCall:''
       }
     },
     mounted() {
+      this.loading = 1;
       axios.get( connections.api + "/buses")
         .then((response) => {
           this.busStops = response.data,
+          this.loading = 0;
             console.log(this.busStops)
         })
         .catch(error => {
@@ -72,13 +77,13 @@
       searchSubmit() {
         if(this.showTable==false)
         {
-        this.searching = 1;
-        return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
-          .then((response) => {
-            this.stopDatas = response.data;
-            return response.data;
-          })
-        }
+          this.searching = 1;
+          return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
+            .then((response) => {
+              this.stopDatas = response.data;
+              return response.data;
+            })
+          }
       },
       createTable(stop) {
         this.inputClass = 'inputStyle';
