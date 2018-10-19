@@ -11,9 +11,13 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    }
-    ,
+      component: Home,
+    },
+    {
+      path: '/:stop',
+      component: Home,
+      props: true
+    },
     {
       path: '/about',
       name: 'about',
