@@ -10,13 +10,14 @@
         :key="stops">{{ stops }}</span>
       <p>{{ requestTime }}</p>
       <table v-if="showTable">
-        <tr>
+
+        <template v-for="(stopInfo) in stopDatas.stopInfos"> 
+         <tr>
           <th>Bus Line</th>
           <th>Head Sign</th>
           <th>Arrival Time from Time Table</th>
           <th>Estimated Arrival Time</th>
         </tr>
-        <template v-for="(stopInfo) in stopDatas.stopInfos">
           <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
             <td>{{busInfo.routeID}}</td>
             <td>{{busInfo.headsign}}</td>
