@@ -1,6 +1,6 @@
 <template>
   <div class="main_body">
-      <router-link :to="{ name: 'homestop', params: { stopName: stop }}"  v-if="tipsList" class="tipsList"
+      <router-link :to="{ name: 'homestop', params: { stopName: stop }}" class="tipsList"
        v-for="stop in stopDatas" :key="stop" >{{stop}}</router-link>
       <div class="preloader" v-if="loading">
         Fetching stops...
@@ -28,7 +28,6 @@
     },
     data() {
       return {
-        tipsList:false,
         stopDatas: [],
         loading: false,
         fetchError: false,
@@ -40,9 +39,8 @@
         axios.get(connections.api + "/buses")
           .then((response) => {
             globals.stops = response.data,
-              this.loading = false,
-              this.tipsList=true;
-              this.stopDatas=globals.stops;
+            this.stopDatas=globals.stops,
+              this.loading = false;
           })
           .catch(error => {
             console.log(error.response)
@@ -52,8 +50,10 @@
       }
       else
       {
+        this.stopDatas=globals.stops;
         this.loading = false;
       }
+      
   }
 }
 </script>
