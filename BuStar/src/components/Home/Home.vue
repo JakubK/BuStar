@@ -9,10 +9,10 @@
         :key="stops">{{ stops }}</span>
       <p v-if="showTable">{{ requestTime }}</p>
       <div v-if="showTable" class="busTables">
+        <table>
         <template v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0" v-for="(stopInfo, index) in stopDatas.stopInfos">
         <span :key="index + 'n'" class="stopId">Stop No. {{ index+1 }}</span>
-          <table :key="index">
-            <tr >
+            <tr :key="index">
             <th>Bus Line</th>
             <th>Head Sign</th>
             <th>Arrival Time from Time Table</th>
@@ -24,8 +24,9 @@
             <td>{{busInfo.theoreticalTime}}</td>
             <td>{{busInfo.estimatedTime}}</td>
             </tr>
-          </table>
+          
         </template>
+        </table>
       </div>
       <div class="preloader" v-if="searching">
         Searching for buses...
