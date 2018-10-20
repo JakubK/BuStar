@@ -41,7 +41,8 @@ namespace BuStarAPI
             services.AddSingleton<IDataParseService,DataParseService>();
             services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection")
             , new DataParseService()
-            , new DateTimeService()));
+            , new DateTimeService(),
+            new DataCache()));
 
             services.AddCors(o => o.AddPolicy("EnableCors", builder =>
             {

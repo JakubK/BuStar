@@ -14,12 +14,17 @@ namespace BuStarAPI.Repository
     private LiteRepository repository;
     private IDataParseService dataParseService;
     private IDateTimeService dateTimeService;
-    public BuStarRepository(string connectionString, IDataParseService dataParseServiceParam, IDateTimeService dateTimeServiceParam)
+    private IDataCache dataCache;
+    public BuStarRepository(string connectionString,
+     IDataParseService dataParseServiceParam,
+      IDateTimeService dateTimeServiceParam,
+      IDataCache dataCacheParam)
     {
       repository = new LiteRepository(connectionString);
 
       this.dataParseService = dataParseServiceParam;
       this.dateTimeService = dateTimeServiceParam;
+      this.dataCache = dataCacheParam;
     }
     public void AddBuses(IEnumerable<Bus> buses)
     {
@@ -48,10 +53,18 @@ namespace BuStarAPI.Repository
 
     public StopInfoResponse GetStopData(string stop)
     {
-      var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
-      var buses = GetBuses();
       StopInfoResponse response = new StopInfoResponse();
       response.ResponseTime = dateTimeService.Current();
+
+      if(dataCache.GetCachedResponse(stop) != null)
+      {
+        if(dataCache.GetCachedResponse(stop).ResponseTime == response.ResponseTime)
+        {
+          return dataCache.GetCachedResponse(stop);
+        }
+      }
+      var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
+      var buses = GetBuses();
 
       using (var client = new WebClient())
       {
@@ -72,6 +85,8 @@ namespace BuStarAPI.Repository
           r.RouteID = buses.Where(x => x.Id == r.RouteID).Select(y => y.Name).FirstOrDefault();
         }
       }
+
+      dataCache.CacheResponse(stop, response);
 
       return response;
     }

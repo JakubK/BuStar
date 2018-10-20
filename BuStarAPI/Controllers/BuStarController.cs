@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BuStarAPI.Models;
 using BuStarAPI.Repository;
+using BuStarAPI.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,7 @@ namespace BuStarAPI.Controllers
   public class BuStarController : ControllerBase
   {
     private IRepository repository;
-
+    
     public BuStarController(IRepository repositoryParam)
     {
       this.repository = repositoryParam;
