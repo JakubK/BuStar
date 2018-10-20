@@ -7,7 +7,7 @@
       <input hidden type="submit">
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
-      <p v-if="showTable">{{ requestTime }}</p>
+      <p class="requestTime" v-if="showTable">{{ requestTime }}</p>
       <div v-if="showTable" class="busTables">
         <table>
         <template v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0" v-for="(stopInfo, index) in stopDatas.stopInfos">

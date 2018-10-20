@@ -63,6 +63,7 @@ $tableTextColor: #25A25A;
   background-color:white;
   padding:5px;
   display:block;
+  font-family: 'Open Sans', sans-serif;
 }
 .stopId{
   padding-top: 15px;
@@ -70,6 +71,7 @@ $tableTextColor: #25A25A;
   text-align: center;
   font-size:3vh;
   color: black;
+  font-family: 'Open Sans', sans-serif;
 }
 .busTables {
   display: flex;
@@ -118,6 +120,7 @@ background-color: rgba(#ccc,0.5);
     border-collapse: collapse;
     color: $tableTextColor;
     text-align: center;
+    font-family: 'Lato', sans-serif;
   }
 
   tr
@@ -139,4 +142,10 @@ background-color: rgba(#ccc,0.5);
       }
     }
 
+  }
+
+  .requestTime
+  {
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
   }
