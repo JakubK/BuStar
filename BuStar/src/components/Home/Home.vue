@@ -8,23 +8,25 @@
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
       <p v-if="showTable">{{ requestTime }}</p>
-      <table v-if="showTable">
+      <div v-if="showTable" class="busTables">
         <template v-for="(stopInfo, index) in stopDatas.stopInfos">
-
-          <tr :key="index" v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0">
+        <span class="stopId">Stop No. {{ index+1 }}</span>
+          <table>
+            <tr :key="index" v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0">
             <th>Bus Line</th>
             <th>Head Sign</th>
             <th>Arrival Time from Time Table</th>
             <th>Estimated Arrival Time</th>
-          </tr>
-          <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
+            </tr>
+            <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
             <td>{{busInfo.routeID}}</td>
             <td>{{busInfo.headsign}}</td>
             <td>{{busInfo.theoreticalTime}}</td>
             <td>{{busInfo.estimatedTime}}</td>
-          </tr>
+            </tr>
+          </table>
         </template>
-      </table>
+      </div>
       <div class="preloader" v-if="searching">
         Searching for buses...
         <three-dots />

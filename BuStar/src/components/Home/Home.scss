@@ -28,11 +28,11 @@ $tableTextColor: #25A25A;
       display:block;
       margin: auto;
   }
-  
+
   @media only screen and (max-width: 900px) {
     .inputStyle {width: 70vw;}
   }
-  
+
 .inputStyleActive{
   text-align: center;
   position: static;
@@ -54,6 +54,19 @@ $tableTextColor: #25A25A;
   background-color:white;
   padding:5px;
   display:block;
+}
+.stopId{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size:3vh;
+}
+.busTables {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow: auto;
 }
 .tipsList:hover{
 background-color: rgba(#ccc,0.5);
