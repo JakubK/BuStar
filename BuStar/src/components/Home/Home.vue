@@ -1,6 +1,6 @@
 <template>
   <div class="main_body">
-    <p>BuStar</p>
+    <p class="home-header">BuStar</p>
     <form @submit.prevent="createTable(busStopsTips[0])">
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off"
         autocapitalize="off" spellcheck="false" type="text" autofocus placeholder="Start typing your stop name">

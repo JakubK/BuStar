@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+
+
+
 .main_body {
   background-color: #ecf0f1;
   display: flex;
@@ -22,6 +27,17 @@ span {
 .about_section {
   margin: 40px;
 }
+
+.about-header, .authors-header ,.author-nick
+{
+  font-family: 'Open-Sans', sans-serif;
+}
+
+.about-text, .author-roles
+{
+  font-family: 'Lato', sans-serif;
+}
+
 .author-boxes {
   display: flex;
   align-items: center;

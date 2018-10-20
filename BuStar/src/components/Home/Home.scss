@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lato:300');
+
 $borderColor: #34495E;
 $tableTextColor: #25A25A;
 
@@ -10,6 +13,12 @@ $tableTextColor: #25A25A;
   flex-direction: column;
 
   overflow-y: scroll;
+}
+
+.home-header
+{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
 }
 
 .inputStyle{
@@ -90,6 +99,7 @@ background-color: rgba(#ccc,0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Lato', sans-serif;
   }
 
   p {
