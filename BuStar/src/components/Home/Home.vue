@@ -113,6 +113,7 @@
     },
     methods: {
       searchSubmit() {
+        this.$router.replace('/');
         if (this.showTable == false)
           this.searching = true;
         return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
