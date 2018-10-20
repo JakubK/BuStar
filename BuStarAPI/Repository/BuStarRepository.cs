@@ -76,7 +76,7 @@ namespace BuStarAPI.Repository
 
     public IEnumerable<string> GetStopNames()
     {
-      return repository.Query<Stop>().ToList().Select(x => x.Name).Distinct();
+      return repository.Query<Stop>().ToList().Select(x => x.Name).Distinct().OrderBy(x => x);
     }
   }
 }
