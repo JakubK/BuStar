@@ -59,12 +59,18 @@ namespace BuStarAPI.Services
 
       foreach(var route in routes)
       {
-        stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString().Trim(), Name = route["stopDesc"].ToString().Trim()};
+        stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString().Trim()
+        , Name = route["stopDesc"].ToString().Trim()
+        , Latitude = route["stopLat"].ToString()
+        , Longitude = route["stopLon"].ToString()};
       }
 
       foreach(var item in stops)
       {
-        result.Add(new Stop { Id = item.Value.Id, Name = item.Value.Name});
+        result.Add(new Stop { Id = item.Value.Id,
+         Name = item.Value.Name,
+         Latitude = item.Value.Latitude,
+         Longitude = item.Value.Longitude});
       }
 
       return result;    

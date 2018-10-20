@@ -52,14 +52,16 @@ namespace BuStarAPI.Repository
       var buses = GetBuses();
       StopInfoResponse response = new StopInfoResponse();
       response.ResponseTime = dateTimeService.Current();
-      System.Diagnostics.Debug.WriteLine(dateTimeService.Current());
-      System.Diagnostics.Debug.WriteLine(DateTime.Now);
+
       using (var client = new WebClient())
       {
         foreach(var s in stops) //each stopInfo
         {
           var stopInfoJson = client.DownloadString(new Uri("http://87.98.237.99:88/delays?stopId=" + s.Id));
-          response.StopInfos.Add(dataParseService.ParseStopInfo(stopInfoJson));
+          StopInfo info = dataParseService.ParseStopInfo(stopInfoJson);
+          info.Longitude = s.Longitude;
+          info.Latitude = s.Latitude;
+          response.StopInfos.Add(info);
         }
       }
 
