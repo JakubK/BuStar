@@ -10,9 +10,9 @@
       <p v-if="showTable">{{ requestTime }}</p>
       <div v-if="showTable" class="busTables">
         <template v-for="(stopInfo, index) in stopDatas.stopInfos">
-        <span class="stopId">Stop No. {{ index+1 }}</span>
-          <table>
-            <tr :key="index" v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0">
+        <span :key="index + 'n'" class="stopId">Stop No. {{ index+1 }}</span>
+          <table :key="index">
+            <tr v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0">
             <th>Bus Line</th>
             <th>Head Sign</th>
             <th>Arrival Time from Time Table</th>
