@@ -36,3 +36,71 @@ img {
   height: 55px;
   width: 120px;
 }
+
+.navigation-burger
+{
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  position: relative;
+
+  &:hover
+  {
+    cursor: pointer;
+  }
+}
+
+.burger-segment
+{
+  width: 100%;
+  height: 3px;
+  position: relative;
+  display: block;
+  margin-top: 17px;
+
+  background-color: white;
+
+  &::after
+  {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    content: '';
+    bottom: 10px;
+  }
+
+  &::before
+  {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    content: '';
+    top: 10px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .navigation-burger {
+    display: block;
+  }
+  .navbarToggled
+  {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #27ae60;
+
+    top: 60px;
+    width: 100%;
+
+    .nav-item
+    {
+      padding: 10px;
+    }
+  }
+}
