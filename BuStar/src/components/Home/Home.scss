@@ -28,6 +28,11 @@ $tableTextColor: #25A25A;
       display:block;
       margin: auto;
   }
+  
+  @media only screen and (max-width: 900px) {
+    .inputStyle {width: 70vw;}
+  }
+  
 .inputStyleActive{
   text-align: center;
   position: static;
