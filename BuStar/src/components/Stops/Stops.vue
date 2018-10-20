@@ -50,7 +50,12 @@
             this.loading = false;
           })
       }
-},}
+      else
+      {
+        this.loading = false;
+      }
+  }
+}
 </script>
 
 <style lang="scss" src="./Stops.scss" scoped></style>
