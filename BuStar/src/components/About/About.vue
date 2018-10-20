@@ -10,19 +10,19 @@
             <div class="author">
              <a href="https://gitlab.com/mateuszh.spam"><img src="../../assets/revange_av.png" fluid alt="RevangE" height="150px" width="150px"/></a>
             <h4>RevangE</h4>
-            <span>Main functionality of the main page</span>
+            <span>Frontend</span>
             <div></div>
             </div>
             <div class="author">
-            <a href="https://gitlab.com/jakubkuniszewski1"><img src="../../assets/jakub_av.png" fluid alt="Jakub" height="150px" width="150px"/></a>
+            <a href="https://github.com/JakubK"><img src="../../assets/jakub_av.png" fluid alt="Jakub" height="150px" width="150px"/></a>
             <h4>Jakub K</h4>
-            <span>Backend, project lead</span>
+            <span>FullStack, Design and Project Lead</span>
             <div></div>
             </div>
             <div class="author">
             <a href="https://gitlab.com/m.blumka07"><img src="../../assets/klon_av.png" fluid alt="Klon" height="150px" width="150px"/></a>
             <h4>Klon</h4>
-            <span>Logo</span>
+            <span>Logo & SCSS</span>
             <div></div>
             </div>
             <div class="author">
