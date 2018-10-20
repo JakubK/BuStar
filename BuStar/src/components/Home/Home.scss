@@ -68,6 +68,13 @@ $tableTextColor: #25A25A;
   flex-direction: column;
   overflow: auto;
 }
+@media only screen and (max-width: 350px) {
+  table {
+      overflow: auto;
+      margin-left: 40px;
+      width: 100px;
+  }
+}
 .tipsList:hover{
 background-color: rgba(#ccc,0.5);
 }
