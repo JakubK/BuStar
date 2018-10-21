@@ -81,12 +81,8 @@ $tableTextColor: #25A25A;
   flex-direction: column;
   overflow: auto;
 }
-@media only screen and (max-width: 350px) {
-table {
-      overflow: auto;
-      width: 100px;
-  }
-}
+
+  
 .tipsList:hover{
 background-color: rgba(#ccc,0.5);
 }
@@ -145,7 +141,11 @@ background-color: rgba(#ccc,0.5);
 
     td, th
     {
-      padding: 10px;
+      @media only screen and (min-width: 351px) {
+          padding: 10px;
+
+      }
+        
       border-right: solid 2px $borderColor;
       &:last-of-type
       {
@@ -160,3 +160,11 @@ background-color: rgba(#ccc,0.5);
     font-size: 22px;
     font-family: 'Lato', sans-serif;
   }
+
+  @media only screen and (max-width: 350px) {
+    table, tr, th, td {
+          overflow: auto;
+          width: auto;
+          padding: 0;
+      }
+    }
