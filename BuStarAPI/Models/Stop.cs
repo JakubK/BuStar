@@ -1,12 +1,11 @@
 using LiteDB;
 
-namespace BuStarAPI
+namespace BuStarAPI.Models
 {
   public class Stop
   {
     public string Id {get;set;}
     public string Name {get;set;}
-    public string Latitude {get;set;}
-    public string Longitude {get;set;}
+    public Coordinates Coordinates {get;set;}
   }
 }

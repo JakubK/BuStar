@@ -6,8 +6,9 @@ namespace BuStarAPI.Models
   {
     public List<BusInfo> BusInfos {get;set;}
 
-    public string Longitude {get;set;}
-    public string Latitude {get;set;}
+    public WeatherInfo WeatherInfo {get;set;}
+
+    public Coordinates Coordinates {get;set;}
 
     public StopInfo()
     {
