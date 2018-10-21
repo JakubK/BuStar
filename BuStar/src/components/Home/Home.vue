@@ -16,12 +16,9 @@
             <tr :key="index + 'n'" class="stopId trText">
               <td colspan="4">Stop No. {{ index+1 }}</td>
             </tr>
-            <tr :key="stopInfo" class="trText">
+            <tr :key="index + 'na'" class="trText">
               <td class="tdText" colspan="4"><img  v-bind:src="'https://localhost:5001/Icons/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="5%" />It's {{stopDatas.stopInfos[index].weatherInfo.description}} outside, dress up correctly.</td>
             </tr>
-            <!-- <tr :key="index + 'n'" class="trText">
-              <td class="tdText"colspan="4" style="font-size:2vh">It's {{stopDatas.stopInfos[index].weatherInfo.description}} outside, dress up correctly.</td>
-            </tr>-->
             <tr :key="index">
               <th>Bus Line</th>
               <th>Head Sign</th>

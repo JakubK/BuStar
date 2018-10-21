@@ -87,7 +87,7 @@ namespace BuStarAPI.Services
       return new WeatherInfo
       {
         ID = jObject["weather"][0]["id"].ToString(),
-        Name = jObject["weather"][0]["main"].ToString(),
+        Temperature = jObject["main"]["temp"].ToString(),
         Description = jObject["weather"][0]["description"].ToString()
       };
     }
