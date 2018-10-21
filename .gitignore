@@ -5,6 +5,8 @@ BuStar/npm-debug.log*
 BuStar/yarn-debug.log*
 BuStar/yarn-error.log*
 
+BuStarAPI/appsettings.json
+
 # Editor directories and files
 .idea
 .vscode
