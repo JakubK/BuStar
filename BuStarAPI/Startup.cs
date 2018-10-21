@@ -63,7 +63,7 @@ namespace BuStarAPI
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "Icons")),
+                Path.Combine(Directory.GetCurrentDirectory(),"wwwroot", "Icons")),
                 RequestPath = "/Icons"
             });
 
