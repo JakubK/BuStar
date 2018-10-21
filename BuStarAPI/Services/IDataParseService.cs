@@ -8,5 +8,6 @@ namespace BuStarAPI.Services
     List<Bus> ParseBuses(string json);
     List<Stop> ParseStops(string json);
     StopInfo ParseStopInfo(string json);
+    WeatherInfo ParseWeatherInfo(string json);
   }
 }

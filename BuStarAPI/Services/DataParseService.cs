@@ -60,20 +60,36 @@ namespace BuStarAPI.Services
       foreach(var route in routes)
       {
         stops[route["stopId"]] = new Stop { Id = route["stopId"].ToString().Trim()
-        , Name = route["stopDesc"].ToString().Trim()
-        , Latitude = route["stopLat"].ToString()
-        , Longitude = route["stopLon"].ToString()};
+        , Name = route["stopDesc"].ToString().Trim(),
+          Coordinates = new Coordinates
+          {
+            Latitude = route["stopLat"].ToString(), 
+            Longitude = route["stopLon"].ToString()
+          }
+        };
       }
 
       foreach(var item in stops)
       {
         result.Add(new Stop { Id = item.Value.Id,
          Name = item.Value.Name,
-         Latitude = item.Value.Latitude,
-         Longitude = item.Value.Longitude});
+         Coordinates = item.Value.Coordinates
+        });
       }
 
       return result;    
+    }
+
+    public WeatherInfo ParseWeatherInfo(string json)
+    {
+      JObject jObject = JObject.Parse(json);
+
+      return new WeatherInfo
+      {
+        ID = jObject["weather"][0]["id"].ToString(),
+        Name = jObject["weather"][0]["main"].ToString(),
+        Description = jObject["weather"][0]["description"].ToString()
+      };
     }
   }
 }
