@@ -16,8 +16,8 @@
             <tr :key="index + 'n'" class="stopId trText">
               <td colspan="4">Stop No. {{ index+1 }}</td>
             </tr>
-            <tr class="stopId trText">
-              <td><img v-bind:src="'../../assets/OpenWeatherMap/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="200" /></td>
+            <tr :key="index + 'na'" class="stopId trText">
+              <td><img v-bind:src="'https://localhost:5001/Icons/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="200" /></td>
             </tr>
             <tr :key="index">
               <th>Bus Line</th>
