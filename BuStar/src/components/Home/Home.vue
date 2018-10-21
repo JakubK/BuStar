@@ -17,7 +17,7 @@
               <td colspan="4">Stop No. {{ index+1 }}</td>
             </tr>
             <tr :key="index + 'na'" class="trText">
-              <td class="tdText" colspan="4"><img  v-bind:src="'https://localhost:5001/Icons/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="5%" />It's {{stopDatas.stopInfos[index].weatherInfo.description}} outside, dress up correctly.</td>
+              <td class="tdText" colspan="4"><img  v-bind:src="'https://localhost:5001/Icons/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="5%" />It's {{stopDatas.stopInfos[index].weatherInfo.description}} outside, dress up correctly.<sup>({{(parseInt(stopDatas.stopInfos[index].weatherInfo.temperature)-273)}}°C)</sup></td>
             </tr>
             <tr :key="index">
               <th>Bus Line</th>
