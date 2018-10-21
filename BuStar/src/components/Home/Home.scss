@@ -127,6 +127,14 @@ background-color: rgba(#ccc,0.5);
   {
     border:none;
   }
+  .tdText
+  {
+    padding: 0;
+    text-align: center;
+    font-size:2vh;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+  }
   tr
   {
     border-bottom: solid 2px $borderColor;
