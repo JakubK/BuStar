@@ -65,6 +65,7 @@ $tableTextColor: #25A25A;
   display:block;
   font-family: 'Open Sans', sans-serif;
 }
+
 .stopId{
   padding-top: 15px;
   padding-bottom: 15px;
@@ -122,14 +123,16 @@ background-color: rgba(#ccc,0.5);
     text-align: center;
     font-family: 'Lato', sans-serif;
   }
-
+  .trText
+  {
+    border:none;
+  }
   tr
   {
     border-bottom: solid 2px $borderColor;
     &:last-of-type
     {
       border-bottom: none;
-
     }
 
     td, th

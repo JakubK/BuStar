@@ -1,5 +1,6 @@
 <template>
   <div class="main_body">
+
     <p class="home-header">BuStar</p>
     <form @submit.prevent="createTable(busStopsTips[0])">
       <input v-bind:class="inputClass" v-model="searchInput" @input="inputChange" autocomplete="off" autocorrect="off"
@@ -8,11 +9,16 @@
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
       <p class="requestTime" v-if="showTable && notEmptyReponse">{{ requestTime }}</p>
-      <p class="requestTime" v-if="!notEmptyReponse && showTable">No active stops found</p>
+      <p class="requestTime" v-if="!notEmptyReponse && showTable">There is no bus leaving this bus station in a while</p>
       <div v-if="showTable" class="busTables">
         <table>
-        <template v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0" v-for="(stopInfo, index) in stopDatas.stopInfos">
-        <td :key="index + 'n'" class="stopId" colspan="4">Stop No. {{ index+1 }}</td>
+          <template v-if="stopDatas.stopInfos[index].busInfos.length>0" v-for="(stopInfo, index) in stopDatas.stopInfos">
+            <tr :key="index + 'n'" class="stopId trText">
+              <td colspan="4">Stop No. {{ index+1 }}</td>
+            </tr>
+            <tr class="stopId trText">
+              <td><img v-bind:src="'../../assets/OpenWeatherMap/' + stopDatas.stopInfos[index].weatherInfo.id +'.svg'" width="200" /></td>
+            </tr>
             <tr :key="index">
               <th>Bus Line</th>
               <th>Head Sign</th>
@@ -25,7 +31,7 @@
               <td>{{busInfo.theoreticalTime}}</td>
               <td>{{busInfo.estimatedTime}}</td>
             </tr>
-        </template>
+          </template>
         </table>
       </div>
       <div class="preloader" v-if="searching">
@@ -75,7 +81,7 @@
         stopDatas: [],
         busStopsTips: [],
         searchInput: '',
-
+        imageSource: '200.svg',
         searching: false,
         loading: false,
         fetchError: false,
@@ -119,6 +125,7 @@
         return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
+            console.log(this.stopDatas)
             return response.data;
           })
       },
@@ -168,14 +175,10 @@
       requestTime() {
         return this.stopDatas.responseTime;
       },
-      notEmptyReponse()
-      {
-        if(this.stopDatas.stopInfos !== undefined)
-        {
-          for(let i = 0;i < this.stopDatas.stopInfos.length;i++)
-          {
-            if(this.stopDatas.stopInfos[i].busInfos.length > 0)
-            {
+      notEmptyReponse() {
+        if (this.stopDatas.stopInfos !== undefined) {
+          for (let i = 0; i < this.stopDatas.stopInfos.length; i++) {
+            if (this.stopDatas.stopInfos[i].busInfos.length > 0) {
               return true;
             }
           }
@@ -187,5 +190,5 @@
   }
 
 </script>
-
-<style lang="scss" src="./Home.scss" scoped></style>
+<style lang="scss" src="./Home.scss" scoped>
+</style>
