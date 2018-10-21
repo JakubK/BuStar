@@ -39,10 +39,12 @@ namespace BuStarAPI
             });
 
             services.AddSingleton<IDataParseService,DataParseService>();
-            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection")
+            services.AddSingleton<IRepository>(dataMapper => new BuStarRepository(Configuration.GetConnectionString("DefaultConnection"),
+            Configuration.GetConnectionString("WeatherAPIKey")
             , new DataParseService()
             , new DateTimeService(),
-            new DataCache()));
+            new DataCache(),
+            new WeatherCache()));
 
             services.AddCors(o => o.AddPolicy("EnableCors", builder =>
             {

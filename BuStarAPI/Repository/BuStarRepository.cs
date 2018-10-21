@@ -15,16 +15,23 @@ namespace BuStarAPI.Repository
     private IDataParseService dataParseService;
     private IDateTimeService dateTimeService;
     private IDataCache dataCache;
+    private IWeatherCache weatherCache;
+
+    private string weatherApiKey;
     public BuStarRepository(string connectionString,
-     IDataParseService dataParseServiceParam,
+      string weatherApiKey,
+      IDataParseService dataParseServiceParam,
       IDateTimeService dateTimeServiceParam,
-      IDataCache dataCacheParam)
+      IDataCache dataCacheParam,
+      IWeatherCache weatherCacheParam)
     {
       repository = new LiteRepository(connectionString);
+      this.weatherApiKey = weatherApiKey;
 
       this.dataParseService = dataParseServiceParam;
       this.dateTimeService = dateTimeServiceParam;
       this.dataCache = dataCacheParam;
+      this.weatherCache = weatherCacheParam;
     }
     public void AddBuses(IEnumerable<Bus> buses)
     {
@@ -56,37 +63,64 @@ namespace BuStarAPI.Repository
       StopInfoResponse response = new StopInfoResponse();
       response.ResponseTime = dateTimeService.Current();
 
-      if(dataCache.GetCachedResponse(stop) != null)
+      if(dataCache.GetCachedResponse(stop) != null && dataCache.GetCachedResponse(stop).ResponseTime == response.ResponseTime)
       {
-        if(dataCache.GetCachedResponse(stop).ResponseTime == response.ResponseTime)
-        {
-          return dataCache.GetCachedResponse(stop);
-        }
+          response.StopInfos = dataCache.GetCachedResponse(stop).StopInfos;
       }
-      var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
-      var buses = GetBuses();
-
-      using (var client = new WebClient())
+      else
       {
-        foreach(var s in stops) //each stopInfo
+          var stops = GetStops().Where(x => x.Name.ToLower() == stop.ToLower());
+          var buses = GetBuses();
+
+          using (var client = new WebClient())
+          {
+            foreach(var s in stops) //each stopInfo
+            {
+              var stopInfoJson = client.DownloadString(new Uri("http://87.98.237.99:88/delays?stopId=" + s.Id));
+              StopInfo info = dataParseService.ParseStopInfo(stopInfoJson);
+
+              info.Coordinates = s.Coordinates;
+              response.StopInfos.Add(info);
+            }
+          }
+
+          
+        foreach(var s in response.StopInfos)
         {
-          var stopInfoJson = client.DownloadString(new Uri("http://87.98.237.99:88/delays?stopId=" + s.Id));
-          StopInfo info = dataParseService.ParseStopInfo(stopInfoJson);
-          info.Longitude = s.Longitude;
-          info.Latitude = s.Latitude;
-          response.StopInfos.Add(info);
+          foreach(var r in s.BusInfos) // assign Bus names instead of ID's
+          {
+            r.RouteID = buses.Where(x => x.Id == r.RouteID).Select(y => y.Name).FirstOrDefault();
+          }
         }
+
+        dataCache.CacheResponse(stop, response);
       }
 
-      foreach(var s in response.StopInfos)
+      foreach (var s in response.StopInfos)
       {
-        foreach(var r in s.BusInfos)
-        {
-          r.RouteID = buses.Where(x => x.Id == r.RouteID).Select(y => y.Name).FirstOrDefault();
-        }
+         if(s.BusInfos.Count > 0) //ask for a weather for active stops
+          {
+            //ask Cache first
+            using (var client = new WebClient())
+            {
+              if(weatherCache.GetCachedWeather(s.Coordinates) != null 
+              && weatherCache.GetCachedWeather(s.Coordinates).Time < DateTime.Now.AddMinutes(15))
+              {
+                s.WeatherInfo = weatherCache.GetCachedWeather(s.Coordinates);
+              }
+              else
+              {
+                //get data and cache them
+                  var weatherInfoJson = client.DownloadString(new Uri("https://samples.openweathermap.org/data/2.5/weather?lat="
+                  + s.Coordinates.Latitude + "&lon=" + s.Coordinates.Longitude + "&appid=" + weatherApiKey));
+                  WeatherInfo weatherInfo = dataParseService.ParseWeatherInfo(weatherInfoJson);
+                  s.WeatherInfo = weatherInfo;
+                  s.WeatherInfo.Time = DateTime.Now;
+                  weatherCache.CacheWeather(s.Coordinates, weatherInfo);
+              }
+            }
+          }
       }
-
-      dataCache.CacheResponse(stop, response);
 
       return response;
     }
