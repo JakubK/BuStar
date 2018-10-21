@@ -7,7 +7,9 @@ namespace BuStarAPI.Services
   {
     public string Current()
     {
-      return DateTime.Now.ToString("HH:mm",CultureInfo.InvariantCulture);
+        var cetZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
+        var cetTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cetZone);
+        return cetTime.ToString("HH:mm", CultureInfo.InvariantCulture);
     }
   }
 }
