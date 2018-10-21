@@ -7,24 +7,24 @@
       <input hidden type="submit">
       <span v-if="showTips" v-on:click="createTable(stops)" v-bind:class="tipsListClass" v-for="stops in busStopsTips"
         :key="stops">{{ stops }}</span>
-      <p class="requestTime" v-if="showTable">{{ requestTime }}</p>
+      <p class="requestTime" v-if="showTable && notEmptyReponse">{{ requestTime }}</p>
+      <p class="requestTime" v-if="!notEmptyReponse && showTable">No active stops found</p>
       <div v-if="showTable" class="busTables">
         <table>
         <template v-if="Object.keys(stopDatas.stopInfos[index].busInfos).length>0" v-for="(stopInfo, index) in stopDatas.stopInfos">
         <td :key="index + 'n'" class="stopId" colspan="4">Stop No. {{ index+1 }}</td>
             <tr :key="index">
-            <th>Bus Line</th>
-            <th>Head Sign</th>
-            <th>Arrival Time from Time Table</th>
-            <th>Estimated Arrival Time</th>
+              <th>Bus Line</th>
+              <th>Head Sign</th>
+              <th>Arrival Time from Time Table</th>
+              <th>Estimated Arrival Time</th>
             </tr>
             <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
-            <td>{{busInfo.routeID}}</td>
-            <td>{{busInfo.headsign}}</td>
-            <td>{{busInfo.theoreticalTime}}</td>
-            <td>{{busInfo.estimatedTime}}</td>
+              <td>{{busInfo.routeID}}</td>
+              <td>{{busInfo.headsign}}</td>
+              <td>{{busInfo.theoreticalTime}}</td>
+              <td>{{busInfo.estimatedTime}}</td>
             </tr>
-
         </template>
         </table>
       </div>
@@ -37,7 +37,7 @@
         <three-dots />
       </div>
       <div class="preloader" v-else-if="empty">
-        There is no stop with this name.
+        There is no stop with this name or it's inactive today.
       </div>
       <div class="preloader" v-if="fetchError">
         Sorry, stops could not be fetched from the Server. Please refresh this page or try later.
@@ -167,6 +167,20 @@
     computed: {
       requestTime() {
         return this.stopDatas.responseTime;
+      },
+      notEmptyReponse()
+      {
+        if(this.stopDatas.stopInfos !== undefined)
+        {
+          for(let i = 0;i < this.stopDatas.stopInfos.length;i++)
+          {
+            if(this.stopDatas.stopInfos[i].busInfos.length > 0)
+            {
+              return true;
+            }
+          }
+        }
+        return false;
       }
     }
 
