@@ -90,9 +90,6 @@
         reCall: ''
       }
     },
-  destroyed: function () {
-    clearInterval(this.reCall);
-  },
     mounted() {
       this.loading = true;
       if (globals.stops.length == 0) {
