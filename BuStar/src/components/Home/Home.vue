@@ -25,7 +25,7 @@
               <th>Arrival Time from Time Table</th>
               <th>Estimated Arrival Time</th>
             </tr>
-            <tr :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
+            <tr v-bind:class="{'last' : stopInfo.busInfos.indexOf(busInfo) == stopInfo.busInfos.length - 1 }" class="table-row" :key="busInfo.routeID + busInfo.headsign + busInfo.theoreticalTime" v-for="(busInfo) in stopInfo.busInfos">
               <td>{{busInfo.routeID}}</td>
               <td>{{busInfo.headsign}}</td>
               <td>{{busInfo.theoreticalTime}}</td>
@@ -125,7 +125,6 @@
         return axios.get(connections.api + "/stopdata/" + this.searchInput.replace('/', '*'))
           .then((response) => {
             this.stopDatas = response.data;
-            console.log(this.stopDatas)
             return response.data;
           })
       },
