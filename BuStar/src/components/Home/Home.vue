@@ -90,6 +90,9 @@
         reCall: ''
       }
     },
+  destroyed: function () {
+    clearInterval(this.reCall);
+  },
     mounted() {
       this.loading = true;
       if (globals.stops.length == 0) {
@@ -155,7 +158,7 @@
           }
         }
         this.showTable = false;
-        clearInterval(this.reCall)
+        clearInterval(this.reCall);
         if (this.searchInput != '') {
           this.showTips = true;
           if (this.tipsPostion > 0) {
@@ -186,7 +189,6 @@
         return false;
       }
     }
-
   }
 
 </script>
