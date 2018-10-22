@@ -5,6 +5,13 @@ namespace BuStarAPI.Services
 {
   public class DateTimeService : IDateTimeService
   {
+    public DateTime Now
+    {
+      get
+      {
+         return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time"));
+      }
+    }
     public string Current()
     {
         var cetZone = TimeZoneInfo.FindSystemTimeZoneById("Central Europe Standard Time");
