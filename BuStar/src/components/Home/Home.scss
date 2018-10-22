@@ -135,7 +135,7 @@ background-color: rgba(#ccc,0.5);
   tr
   {
     border-bottom: solid 2px $borderColor;
-    &:last-of-type
+    &.last
     {
       border-bottom: none;
     }
