@@ -104,18 +104,17 @@ namespace BuStarAPI.Repository
             using (var client = new WebClient())
             {
               if(weatherCache.GetCachedWeather(s.Coordinates) != null 
-              && weatherCache.GetCachedWeather(s.Coordinates).Time < DateTime.Now.AddMinutes(15))
+              && weatherCache.GetCachedWeather(s.Coordinates).Time < dateTimeService.Now.AddMinutes(15))
               {
                 s.WeatherInfo = weatherCache.GetCachedWeather(s.Coordinates);
               }
               else
               {
                 //get data and cache them
-                  var weatherInfoJson = client.DownloadString(new Uri("https://samples.openweathermap.org/data/2.5/weather?lat="
-                  + s.Coordinates.Latitude + "&lon=" + s.Coordinates.Longitude + "&appid=" + weatherApiKey));
+                  var weatherInfoJson = client.DownloadString(new Uri("http://api.openweathermap.org/data/2.5/weather?lat=" + s.Coordinates.Latitude + "&lon=" + s.Coordinates.Longitude + "&appid=" + weatherApiKey));
                   WeatherInfo weatherInfo = dataParseService.ParseWeatherInfo(weatherInfoJson);
                   s.WeatherInfo = weatherInfo;
-                  s.WeatherInfo.Time = DateTime.Now;
+                  s.WeatherInfo.Time = dateTimeService.Now;
                   weatherCache.CacheWeather(s.Coordinates, weatherInfo);
               }
             }
