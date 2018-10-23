@@ -11,3 +11,6 @@ http://otwartygdansk.pl/
 https://openweathermap.org/api
 
 Navigate to BuStar and BuStarAPI folders to learn how to run those applications on your machine.
+
+Application is available here: 
+http://frisk.space/bustar/
