@@ -1,7 +1,7 @@
 Before running the project you will have to create a file called appsettings.json
 with the following content:
 
-{
+```json {
   "ConnectionStrings":
   {
     "DefaultConnection": "Filename=database.db",
@@ -13,7 +13,7 @@ with the following content:
     }
   },
   "AllowedHosts": "*"
-}
+} ```
 
 You need to replace Weather-API-Key with a key that can be generated for free from here
 https://openweathermap.org/price
