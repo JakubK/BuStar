@@ -13,7 +13,8 @@ with the following content:
     }
   },
   "AllowedHosts": "*"
-} ```
+} 
+```
 
 You need to replace Weather-API-Key with a key that can be generated for free from here
 https://openweathermap.org/price
