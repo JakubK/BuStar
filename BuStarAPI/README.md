@@ -1,3 +1,23 @@
+Before running the project you will have to create a file called appsettings.json
+with the following content:
+
+{
+  "ConnectionStrings":
+  {
+    "DefaultConnection": "Filename=database.db",
+    "WeatherAPIKey" : "Weather-API-Key"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
+
+You need to replace Weather-API-Key with a key that can be generated for free from here
+https://openweathermap.org/price
+
 ## Installation and hosting 
 
 Server advertises its services on port 5001 so it's essential to open the port on your firewall.
